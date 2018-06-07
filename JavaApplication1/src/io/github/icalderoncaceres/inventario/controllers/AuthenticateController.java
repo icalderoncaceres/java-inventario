@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package io.github.icalderoncaceres.inventario.controllers;
-import io.icalderoncaceres.inventario.models.Authenticate;
+import io.github.icalderoncaceres.inventario.models.Authenticate;
 /**
  *
  * @author Iván Calderon / https://icalderoncaceres.github.io

@@ -2,7 +2,7 @@
 * Esta clase es la única que interactuara con la base de datos. Las clases que la hereden tendrán disponibles los metodos del CRUD
 * y podrá agregar nuevos metodos 
 */
-package io.icalderoncaceres.inventario.models;
+package io.github.icalderoncaceres.inventario.models;
 
 /**
  * @author Ivan Calderon / https://icalderoncaceres.github.io
