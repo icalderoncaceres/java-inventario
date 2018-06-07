@@ -16,7 +16,8 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        System.out.println("Sistema de inventario");
+        LoginForm loginForm=new LoginForm();
+        loginForm.start();
     }
     
 }
