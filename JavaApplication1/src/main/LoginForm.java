@@ -12,10 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
+import io.github.icalderoncaceres.inventario.controllers.AuthenticateController;
 
 /**
  *
- * @author dellext
+ * @author Iván Calderon / https://icalderoncaceres.github.io
  */
 public class LoginForm extends JFrame{   
     /*
@@ -26,7 +27,9 @@ public class LoginForm extends JFrame{
     JLabel lblPassword;
     JPasswordField txtPassword;
     JButton btnAceptar;
-    JButton btnCancelar;    
+    JButton btnCancelar;
+    AuthenticateController auth = new AuthenticateController();
+            
     public void start(){
         setLayout(null);
         setBounds(200,200,400,300);
@@ -83,7 +86,11 @@ public class LoginForm extends JFrame{
                         txtPassword.requestFocus();
                         return;
                     }
-                    JOptionPane.showMessageDialog(null,"Solicitamos información de autenticación");
+                    if(auth.logIn(txtUsuario.getText(), txtPassword.getPassword())){
+                        JOptionPane.showMessageDialog(null,"Bienvenido");
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Datos incorrectos");
+                    }
                 }else{
                     txtUsuario.setText("");
                     txtPassword.setText("");
