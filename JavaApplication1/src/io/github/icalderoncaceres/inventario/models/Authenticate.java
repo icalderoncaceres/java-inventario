@@ -5,6 +5,10 @@
  */
 package io.github.icalderoncaceres.inventario.models;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author Iván Calderon / https://icalderoncaceres.github.io
@@ -19,8 +23,24 @@ public class Authenticate extends ModelBase {
     Verifica si coincide el usuario y la clave que recibe buscandolo en la base de datos
     en caso de coincidir devuelve verdadero y establece la session, de lo contrario devuelve falso
     */
-    public static boolean logIn(String user, String password){
-        return user.equals("admin") && password.equals("admin");
+    public boolean logIn(String user, String password){
+        /*
+        Creamos una sentencia que busque en la base de datos el usuario y la contraseña
+        */
+        PreparedStatement prepSt;
+        try {
+            String sql = "SELECT * FROM  users " + " WHERE email like ?";            
+            prepSt = conn.prepareStatement(sql);
+
+            prepSt.setString(1, user);           
+
+            ResultSet rs=prepSt.executeQuery();
+            return rs.next();            
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+        return false;
     }
     
     /*

@@ -13,7 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
 import io.github.icalderoncaceres.inventario.controllers.AuthenticateController;
-
+import io.github.icalderoncaceres.inventario.forms.MainMenu;
 /**
  *
  * @author Iván Calderon / https://icalderoncaceres.github.io
@@ -88,6 +88,8 @@ public class LoginForm extends JFrame{
                     }
                     if(auth.logIn(txtUsuario.getText(), txtPassword.getPassword())){
                         JOptionPane.showMessageDialog(null,"Bienvenido");
+                        MainMenu mm= new MainMenu();
+                        setVisible(false);
                     }else{
                         JOptionPane.showMessageDialog(null,"Datos incorrectos");
                     }

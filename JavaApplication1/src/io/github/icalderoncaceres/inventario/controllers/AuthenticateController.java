@@ -10,13 +10,14 @@ import io.github.icalderoncaceres.inventario.models.Authenticate;
  * @author Iván Calderon / https://icalderoncaceres.github.io
  */
 public class AuthenticateController extends ControllerBase{
+    Authenticate auth = new Authenticate();
     
     /*
     Verifica si coincide el usuario y la clave que recibe buscandolo en la base de datos
     en caso de coincidir devuelve verdadero y establece la session, de lo contrario devuelve falso
     */
     public boolean logIn(String user, char[] password){
-        return Authenticate.logIn(user,String.valueOf(password));
+        return auth.logIn(user,String.valueOf(password));
     }
     
     /*

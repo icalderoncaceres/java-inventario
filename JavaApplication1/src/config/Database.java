@@ -9,30 +9,28 @@ package config;
  * @author Iván Calderon / https://icalderoncaceres.github.io
  */
 public class Database {
-    private static Conexion dev;
-    private static Conexion stg;
-    private static Conexion prod;
-    public static final String active="dev";
-    
     /*
-    Creamos las conexiones
+    Por cada conexión creamos un array de string con los datos de conexión de la forma
+    {'driver','url/database','user','password'}
     */    
+    private static final String[] dev={"com.mysql.jdbc.Driver","jdbc:mysql://35.197.37.204","root","HNLflpMniLbeI5Ag","widget"};
+    private static final String[] stg={"com.mysql.jdbc.Driver","jdbc:mysql://35.197.37.204","root","HNLflpMniLbeI5Ag","widget"};
+    private static final String[] prod={"com.mysql.jdbc.Driver","jdbc:mysql://35.197.37.204","root","HNLflpMniLbeI5Ag","widget"};
     
-    public Database(){
-        dev=new Conexion("postgress","localhost","userlocal","passwordlocal","dblocal");
-        stg=new Conexion("mysql","54.253.325.32","userstg","passwordstg","dbstg");
-        prod=new Conexion("mongo","52.25.35.325","userprod","passwordprod","dbprod");
-    }
-    
-    public Conexion getConexion(){
-        if(active.equals("dev")){
-           return dev;          
-        }else if(active.equals("stg")){
-            return stg;
-        }else if(active.equals("prod")){
-            return prod;
-        }else{
-            return dev;
+    /**
+     *
+     * @param environment String que indica el entorno de la conexión
+     * @return un array con los parametros de configuración
+     */
+    public static String[] getParams(String environment){
+        switch (environment) {
+            case "dev":
+                return dev;
+            case "stg":
+                return stg;
+            default:
+                return prod;
         }
     }
+    
 }

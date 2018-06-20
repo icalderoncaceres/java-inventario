@@ -4,17 +4,39 @@
 */
 package io.github.icalderoncaceres.inventario.models;
 
+import com.mysql.jdbc.Connection;
+import config.Conexion;
+import config.Database;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  * @author Ivan Calderon / https://icalderoncaceres.github.io
  */
 public class ModelBase {
     public String table;
+    protected static Connection conn;
     
     public ModelBase(){
         /*
         Creamos una instancia de la clase Conex, la cual es la encargada de conectarse con la base de datos en función de los
         valores de config/database
-        */         
+        */
+        String[] params=Database.getParams("dev");
+        System.out.println("Tratará de conectarse");
+        conn=null;
+        try{
+            Class.forName(params[0]);
+            conn = (Connection) DriverManager.getConnection(params[1] + "/" + params[4], params[2], params[3]);
+            if(conn!=null){
+                System.out.println("Conexión exitosa");
+                
+            }else{
+                System.out.println("No se pudó conectar");
+            }
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println("No se pudó conectar");
+        }                
     }
     
     public final String index(){

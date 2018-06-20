@@ -5,30 +5,37 @@
  */
 package config;
 
+import com.mysql.jdbc.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
 /**
  *
  * @author Iván Calderon / https://icalderoncaceres.github.io
  */
-public class Conexion {
-    private String drive;
+public final class Conexion {
+    private String driver;
     private String url;
     private String user;
-    private String password;
-    private String database;
+    private final String password;
+    private final String database;
+    private static Connection conn;
     
-    public Conexion(String drive, String url, String user, String password, String database){
-        this.drive=drive;
+    public Conexion(String driver, String url, String user, String password, String database){
+        this.driver=driver;
         this.url=url;
         this.password=password;
         this.database=database;
+        this.Conectar();
     }
 
-    public String getDrive() {
-        return drive;
+    public String getDriver() {
+        return driver;
     }
 
-    public void setDrive(String drive) {
-        this.drive = drive;
+    public void setDriver(String driver) {
+        this.driver = driver;
     }
 
     public String getUrl() {
@@ -51,10 +58,21 @@ public class Conexion {
         return password;
     }
     
-    public String Conectar(){
-        return "Se realizara la conexión con estos parametros: \n DRIVE:" 
-                + drive + "\n URL:" + url + "\n USER:" + user + "\n PASSWORD:" + password + "\n DATABASE:" + database;
+    private void Conectar(){
+        conn=null;
+        try{
+            Class.forName(driver);
+            conn = (Connection) DriverManager.getConnection(url + "/" + database, user, password);
+            if(conn!=null){
+                System.out.println("Conexión exitosa");
+                
+            }
+        }catch(ClassNotFoundException | SQLException e){
+            System.out.println("No se pudó conectar");
+        }       
+    }   
+
+    public PreparedStatement prepareStatement(String sql) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    
 }
