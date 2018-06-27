@@ -5,9 +5,10 @@
 package io.github.icalderoncaceres.inventario.models;
 
 import com.mysql.jdbc.Connection;
-import config.Conexion;
 import config.Database;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -39,8 +40,20 @@ public class ModelBase {
         }                
     }
     
-    public final String index(){
-        return "Lista todos los elementos de la tabla " + table;
+    public final ResultSet index(){
+        /*
+        Creamos una sentencia que busque en la base de datos el usuario y la contraseña
+        */
+        PreparedStatement prepSt;
+        ResultSet rs=null;
+        try {
+            String sql = "SELECT * FROM " + table;            
+            prepSt = conn.prepareStatement(sql);
+            rs=prepSt.executeQuery();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return rs;
     }
     
     public final String show(int id){

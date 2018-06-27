@@ -5,12 +5,15 @@
  */
 package io.github.icalderoncaceres.inventario.controllers;
 
+import io.github.icalderoncaceres.inventario.models.ModelBase;
+
 /**
  *
  * @author Iván Calderon / https://icalderoncaceres.github.io
  */
 public class ControllerBase {
-    
+    public String table="";
+    ModelBase mb=new ModelBase();
     public String index(){
         
         return "Lista todos los elementos los llama del modelo especifico";
