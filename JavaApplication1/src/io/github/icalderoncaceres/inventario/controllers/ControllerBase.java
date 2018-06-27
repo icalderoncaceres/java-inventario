@@ -12,6 +12,7 @@ package io.github.icalderoncaceres.inventario.controllers;
 public class ControllerBase {
     
     public String index(){
+        
         return "Lista todos los elementos los llama del modelo especifico";
     }
     
